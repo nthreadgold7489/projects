@@ -5,13 +5,14 @@ hairColors = ["brown","blonde","ginger","grey","white","red"] #List of possible 
 eyeColors = ["grey","brown","green","blue"] #List of possible answers for eye colors
 genders = ["f","female","m","male"] #Options for gender validation
 
+import json,time,picamera #Imports modules for writing/reading/appending to file, waiting between functions and the camera module
 
 #Create function to take picture and save it to a given name
 def getPicture(name): 
     try:
         with picamera.PiCamera() as camera: #Renames camera module for ease of use
             camera.start_preview() #Begin photo preview to allow camera to adjust settings
-            time.sleep(2) #Give cameras time to adjust
+            time.sleep(1.5) #Give cameras time to adjust
             camera.capture("{0}.jpeg".format(name)) #Take photo and save to the given filename
             camera.stop_preview() #End process
     except picamera.exc.PicameraMMALError: #Catch error, then output error message
@@ -27,8 +28,7 @@ def validate(question,possAnswers):
             inp=inp.lower()
     
 #Defines function to get characteristics of user, asking them each question until a valid input is given.
-def getCharProfile():   .
-
+def getCharProfile():
     #Get user input for variety of features, doing basic validation for each feature
     name=input('What is your name?') 
     hairColor=validate('What is your hair color?',hairColors)
@@ -38,6 +38,11 @@ def getCharProfile():   .
     facialHair=validate('Do you have any facial hair?',['y','n','yes','no'])
     glasses=('Do you wear glasses?',['y','n','yes','no'])
 
+
+    user=''
+    while user.lower() != 'y':
+        getPicture(name)
+        user=input('Are you happy? (y/n)')
 
     #Change 'yes/no' answers to booleans for ease of use later on
     if hat == 'y' or hat=='yes':
@@ -58,3 +63,20 @@ def getCharProfile():   .
     #Put all features into a list
     charProfile=(hairColor,hat,name,eyes,gender,facialHair,glasses)
     return charProfile #Return list so it can be used by other functions
+
+def saveProfile(): #Defines function to add new profile to list and save to txt file
+    profile = getCharProfile() #Make new profile
+    profileList.append(profile) #Adds profile to existing list
+    with open('profiles.txt',mode='w',encoding='utf-8') as p:
+        json.dump(profileList,p)
+
+def loadProfile(): #Defines function to read file
+    try:
+    with open('profiles.txt',mode='r',encoding='utf-8') as p:
+        json.load(p)
+    except IOError:
+        print('No profiles.')
+        time.sleep(1)
+        print('Making new profiles...')
+        profiles = []
+        
