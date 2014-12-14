@@ -72,7 +72,7 @@ def saveProfile(): #Defines function to add new profile to list and save to txt 
 
 def loadProfile(): #Defines function to read file
     try: #Attempt to run following code
-    with open('profiles.txt',mode='r',encoding='utf-8') as p:
+    with open('profiles.txt',mode='r',encoding='utf-8') as p: #Use json to open and load specified file
         json.load(p)
     except IOError: #if it receievs IOError (file not found), run below code
         print('No profiles.') #Output string to tell user
