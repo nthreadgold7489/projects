@@ -38,8 +38,8 @@ def getCharProfile():
     facialHair=validate('Do you have any facial hair?',['y','n','yes','no'])
     glasses=('Do you wear glasses?',['y','n','yes','no'])
 
-
-    user=''
+    #Validate whether user is happy with photo by comparing input to 'y' and looping until they say they are happy (input == 'y')
+    user='' 
     while user.lower() != 'y':
         getPicture(name)
         user=input('Are you happy? (y/n)')
@@ -67,16 +67,16 @@ def getCharProfile():
 def saveProfile(): #Defines function to add new profile to list and save to txt file
     profile = getCharProfile() #Make new profile
     profileList.append(profile) #Adds profile to existing list
-    with open('profiles.txt',mode='w',encoding='utf-8') as p:
+    with open('profiles.txt',mode='w',encoding='utf-8') as p: #Dump info to file using json
         json.dump(profileList,p)
 
 def loadProfile(): #Defines function to read file
-    try:
+    try: #Attempt to run following code
     with open('profiles.txt',mode='r',encoding='utf-8') as p:
         json.load(p)
-    except IOError:
-        print('No profiles.')
+    except IOError: #if it receievs IOError (file not found), run below code
+        print('No profiles.') #Output string to tell user
         time.sleep(1)
-        print('Making new profiles...')
-        profiles = []
+        print('Making new profiles...') #Then tell them new profiles are being made
+        profiles = [] #Make mpty list so profiles can be added
         
