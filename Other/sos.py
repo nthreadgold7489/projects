@@ -1,32 +1,28 @@
 # sos flasher by Nick Theadgold
-import RPi.GPIO as GPIO
-
-import time
+import RPi.GPIO as GPIO,time #Imports necesary modules
 
 #sets numbering format for GPIO holes
 GPIO.setmode(GPIO.BOARD)
-
 GPIO.setup(11,GPIO.OUT)
 
-
-def dot():
+def dot(): #Function to make light flash quickly, and print a dot
         print('.')
-        GPIO.output(11,False)
-        time.sleep(0.5)
-        GPIO.output(11,True)
-        time.sleep(0.5)
+        GPIO.output(11,False) #Turn light on
+        time.sleep(0.5) #Wait 
+        GPIO.output(11,True) #Turn light off
+        time.sleep(0.5) #Wait (this is the interval between dots and dashs)
 	
 
-def dash():
+def dash(): #Function to make light flash for longer period of time
         print('-')
-        GPIO.output(11,False)
-        time.sleep(2)
-        GPIO.output(11,True)
-        time.sleep(0.5)
+        GPIO.output(11,False) #Turn light on
+        time.sleep(2) #Wait for longer
+        GPIO.output(11,True) #Turn off
+        time.sleep(0.5) #Wait for gap between end of this dash and start of next dot/dash
 	
 	
 	
-
+#Function for outputting necessary dots and dashs based on given letter (parameter 'x')
 def morse_letter(x):
         if x=='a':
                 dot()
@@ -143,22 +139,22 @@ def morse_letter(x):
                 
                 
 
-
+#Function that loops through each letter in a string and translates to morse
 def translate(x):
         for i in x:
                 if i.isalpha()==True:
-                        morse_letter(i)
+                        morse_letter(i) #Use above function to output that letter as a morse signal
                 else:
                      pass
 
 
 
-def text_input():
+def text_input(): #Allow user to input text, convert to lower case so the morse_letter() function can understand and then translatethe string
         x=input("Enter text:")
         x=x.lower()
         translate(x)
 
-text_input()
+text_input() #Test run of program
                      
 
 
