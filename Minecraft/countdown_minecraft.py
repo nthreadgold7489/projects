@@ -3,12 +3,12 @@ mc=minecraft.Minecraft.create() # Creates game and connects to it.
 
 time.sleep(3)
 def countdown(x):
-    if x==0:
+    if x==0: #When countdown is finished, say goodbye
         mc.postToChat("goodbye world")
-    else:
+    else: #Otherwise, output how many seconds are left
         mc.postToChat(str(x))
-        time.sleep(1)
+        time.sleep(1) #Wait one second between outputting of 'x' to give impression of countdown
         x-=1
-        countdown(x)
+        countdown(x) #Recursive loop calling countdown() on new value of 'x'
 
-countdown(5)
+countdown(5) #Test run of code
