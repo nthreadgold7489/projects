@@ -19,5 +19,5 @@ def makethendeletewithflash():#Defines function that builds space invader near p
 
 all_lines=((2,8),(3,7),range(2,9),(0,2,4,5,6,8,10),range(11),(0,2,3,4,5,6,7,8,10),(0,2,8,10),(3,4,6,7)) #Coordinatess for where blocks need to be built.
 
-while True:
+while True: #Infitely runs code to make a flashing spaceinvader follow the player
     makethendeletewithflash()
