@@ -1,2 +1,0 @@
-from pyqt import *
-print("...")
