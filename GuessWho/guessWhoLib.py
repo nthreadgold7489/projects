@@ -15,7 +15,7 @@ def getPicture(name):
             time.sleep(1.5) #Give cameras time to adjust
             camera.capture("{0}.jpeg".format(name)) #Take photo and save to the given filename
             camera.stop_preview() #End process
-    except picamera.exc.PicameraMMALError: #Catch error, then output error message
+    except picamera.exc.PiCameraMMALError: #Catch error, then output error message
         print('Could not detect camera') 
 
 
@@ -72,11 +72,13 @@ def saveProfile(): #Defines function to add new profile to list and save to txt 
 
 def loadProfile(): #Defines function to read file
     try:
-    with open('profiles.txt',mode='r',encoding='utf-8') as p:
-        json.load(p)
+        with open('profiles.txt',mode='r',encoding='utf-8') as p:
+            json.load(p)
     except IOError:
         print('No profiles.')
         time.sleep(1)
         print('Making new profiles...')
-        profiles = []
-        
+        saveProfile()
+
+
+
