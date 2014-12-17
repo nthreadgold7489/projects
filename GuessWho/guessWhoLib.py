@@ -64,20 +64,22 @@ def getCharProfile():
     charProfile=(hairColor,hat,name,eyes,gender,facialHair,glasses)
     return charProfile #Return list so it can be used by other functions
 
-def saveProfile(): #Defines function to add new profile to list and save to txt file
+def saveProfile(x): #Defines function to add new profile to list and save to txt file
     profile = getCharProfile() #Make new profile
-    profileList.append(profile) #Adds profile to existing list
+    x.append(profile) #Adds profile to existing list
     with open('profiles.txt',mode='w',encoding='utf-8') as p: #Dump info to file using json
-        json.dump(profileList,p)
+        json.dump(x,p)
 
 def loadProfile(): #Defines function to read file
     try: #Attempt to run following code
         with open('profiles.txt',mode='r',encoding='utf-8') as p: #Use json to open and load specified file
-            son.load(p)
+            json.load(p)
     except IOError: #if it receives IOError (file not found), run below code
         print('No profiles.') #Output string to tell user
         time.sleep(1)
         print('Making new profiles...') #Then tell them new profiles are being made
-        profiles = [] #Make mpty list so profiles can be added
-        
+        profileList = [] #Make mpty list so profiles can be added
+        for i in range(5):
+            saveProfile(profileList)
 
+loadProfile()
