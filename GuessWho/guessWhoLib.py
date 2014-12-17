@@ -71,26 +71,13 @@ def saveProfile(): #Defines function to add new profile to list and save to txt 
         json.dump(profileList,p)
 
 def loadProfile(): #Defines function to read file
-<<<<<<< HEAD
-    try:
-        with open('profiles.txt',mode='r',encoding='utf-8') as p:
-            json.load(p)
-    except IOError:
-        print('No profiles.')
-        time.sleep(1)
-        print('Making new profiles...')
-        saveProfile()
-
-
-
-=======
     try: #Attempt to run following code
-    with open('profiles.txt',mode='r',encoding='utf-8') as p: #Use json to open and load specified file
-        json.load(p)
-    except IOError: #if it receievs IOError (file not found), run below code
+        with open('profiles.txt',mode='r',encoding='utf-8') as p: #Use json to open and load specified file
+            son.load(p)
+    except IOError: #if it receives IOError (file not found), run below code
         print('No profiles.') #Output string to tell user
         time.sleep(1)
         print('Making new profiles...') #Then tell them new profiles are being made
         profiles = [] #Make mpty list so profiles can be added
         
->>>>>>> d6437a3aee51f541a54c05e69283f313601a9c21
+
